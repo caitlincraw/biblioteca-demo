@@ -10,7 +10,7 @@ const GitHubStrategy = require('passport-github').Strategy;
 const mainRouter = require('./routers/main');
 const hbRouter = require('./routers/apiHeartbeat');
 const booksRouter = require('./routers/apiBooks');
-// const authRouter = require('./routers/auth');
+const auth = require('./auth');
 
 // USING MIDDLEWARE 
 app.use("/", express.static(__dirname + "/public"));
@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 app.use(mainRouter);
 app.use("/api", hbRouter);
 app.use("/api", booksRouter);
+app.use("/", auth);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server started at Port ${process.env.PORT}`)
